@@ -302,17 +302,21 @@ if [ $BUILD_LINUX ] ; then
     # If neither, try our precompiled version.
     if (type dpkg-query >/dev/null 2>&1) ; then
         if (apt-cache --quiet=1 policy libopencv-dev | grep -E 'Installed: 3\.') ; then
-            echo "Using installed OpenCV"
+            echo "Using installed OpenCV 3"
         else
-            if (apt-cache --quiet=1 policy libopencv-dev | grep -E 'Candidate: 3\.') ; then
-                echo "Installing OpenCV"
-                sudo apt-get install libopencv-dev
+            if (apt-cache --quiet=1 policy libopencv-dev | grep -E 'Installed: 4\.') ; then
+                echo "Using installed OpenCV 4"
             else
-                echo "Downloading prebuilt OpenCV"
-                if [ ! -d "depends/linux/include/opencv2" ] ; then
-                    curl --location "https://github.com/artoolkitx/opencv/releases/download/3.4.1-dev-artoolkitx/opencv-3.4.1-dev-artoolkitx-linux-x86_64.tgz" -o opencv2.tgz
-                    tar xzf opencv2.tgz --strip-components=1 -C depends/linux
-                    rm opencv2.tgz
+                if (apt-cache --quiet=1 policy libopencv-dev | grep -E 'Candidate: 3\.') ; then
+                    echo "Installing OpenCV"
+                    sudo apt-get install libopencv-dev
+                else
+                    echo "Downloading prebuilt OpenCV"
+                    if [ ! -d "depends/linux/include/opencv2" ] ; then
+                        curl --location "https://github.com/artoolkitx/opencv/releases/download/3.4.1-dev-artoolkitx/opencv-3.4.1-dev-artoolkitx-linux-x86_64.tgz" -o opencv2.tgz
+                        tar xzf opencv2.tgz --strip-components=1 -C depends/linux
+                        rm opencv2.tgz
+                    fi
                 fi
             fi
         fi
