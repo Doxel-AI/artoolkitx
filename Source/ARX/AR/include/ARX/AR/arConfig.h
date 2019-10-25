@@ -97,7 +97,7 @@
 #define   AR_AREA_MIN                        70		// Minimum area (in pixels) of connected regions considered valid candidate for marker detection.
 #define   AR_SQUARE_FIT_THRESH                1.0
 
-#define   AR_LABELING_32_BIT                  0     // 0 = 16 bits per label, 1 = 32 bits per label.
+#define   AR_LABELING_32_BIT                  1     // 0 = 16 bits per label, 1 = 32 bits per label.
 #if AR_LABELING_32_BIT
 #  define AR_LABELING_WORK_SIZE      1024*32*16
 #  define AR_LABELING_LABEL_TYPE        ARInt32
@@ -111,7 +111,7 @@
 #else
 #define   AR_SQUARE_MAX                      60     // Maxiumum number of marker squares per frame.
 #endif
-#define   AR_CHAIN_MAX                    10000
+#define   AR_CHAIN_MAX                    1000000
 
 #define   AR_LABELING_THRESH_AUTO_INTERVAL_DEFAULT 7 // Number of frames between auto-threshold calculations.
 #define   AR_LABELING_THRESH_MODE_DEFAULT     AR_LABELING_THRESH_MODE_MANUAL
